@@ -17,63 +17,75 @@ def show_image():
                 padding: 0; 
                 box-sizing: border-box; 
             }
+            html, body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;  /* 移除滾動條 */
+                background: #000000;
+            }
             body {
-                background: #0a0a12;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                min-height: 100vh;
-                margin: 0;
-                font-family: system-ui, -apple-system, sans-serif;
             }
-            .container {
-                background: #14141f;
-                padding: 24px;
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-                border: 1px solid #2a2a3e;
-                max-width: 95vw;
-            }
-            img {
-                max-width: 85vw;
-                max-height: 80vh;
-                border-radius: 12px;
+            .fullscreen-image {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;  /* 圖片填滿整個畫面，可能裁切 */
                 display: block;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             }
-            .footer {
-                color: #555577;
+            /* 如果不想裁切圖片，改用 contain（完整顯示但可能有黑邊） */
+            /*
+            .fullscreen-image {
+                width: 100vw;
+                height: 100vh;
+                object-fit: contain;
+                background: #000000;
+            }
+            */
+            
+            /* 封鎖標示 - 浮在圖片上方 */
+            .overlay {
+                position: fixed;
+                bottom: 30px;
+                left: 0;
+                right: 0;
                 text-align: center;
-                margin-top: 14px;
-                font-size: 13px;
-                letter-spacing: 0.3px;
-                border-top: 1px solid #1e1e32;
-                padding-top: 12px;
+                color: #ffffff;
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                text-shadow: 0 2px 20px rgba(0,0,0,0.9);
+                background: rgba(0,0,0,0.4);
+                padding: 12px 20px;
+                backdrop-filter: blur(4px);
+                border-top: 1px solid rgba(255,255,255,0.1);
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                margin: 0 auto;
+                width: fit-content;
+                max-width: 90%;
+                border-radius: 8px;
+                pointer-events: none;  /* 讓點擊穿透 */
             }
-            .footer span {
+            .overlay span {
                 color: #ff4444;
                 font-weight: bold;
             }
+            
+            /* 手機優化 */
             @media (max-width: 600px) {
-                .container {
-                    padding: 12px;
-                }
-                img {
-                    max-width: 90vw;
-                    max-height: 70vh;
-                }
-                .footer {
-                    font-size: 11px;
+                .overlay {
+                    font-size: 12px;
+                    padding: 10px 16px;
+                    bottom: 20px;
                 }
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <img src="/static/your_image.jpg" alt="已封鎖">
-            <div class="footer">
-                ⛔ <span>已封鎖</span> · 此內容已被限制存取
-            </div>
+        <img class="fullscreen-image" src="/static/image.png" alt="已封鎖">
+        <div class="overlay">
+            ⛔ <span>已封鎖</span> · 此內容已被限制存取
         </div>
     </body>
     </html>
