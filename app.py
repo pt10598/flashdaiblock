@@ -26,16 +26,14 @@ def show_image():
                 font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             }
             .image-container {
-                max-width: 95vw;
-                max-height: 95vh;
+                max-width: 90vw;
+                max-height: 90vh;
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
                 border-radius: 18px;
                 overflow: hidden;
                 background: #ffffff;
                 line-height: 0;
                 transition: box-shadow 0.2s ease;
-                /* 圖片放大20% */
-                transform: scale(1.2);
             }
             .image-container:hover {
                 box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
@@ -70,9 +68,6 @@ def show_image():
             }
             
             @media (max-width: 600px) {
-                .image-container {
-                    transform: scale(1.1);
-                }
                 .footer {
                     font-size: 11px;
                     padding: 8px 0;
