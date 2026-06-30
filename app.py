@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, send_file
 import os
 
 app = Flask(__name__)
@@ -12,15 +12,11 @@ def show_image():
         <meta charset="UTF-8">
         <title>已封鎖</title>
         <style>
-            * { 
-                margin: 0; 
-                padding: 0; 
-                box-sizing: border-box; 
-            }
+            * { margin: 0; padding: 0; box-sizing: border-box; }
             html, body {
                 width: 100%;
                 height: 100%;
-                overflow: hidden;  /* 移除滾動條 */
+                overflow: hidden;
                 background: #000000;
             }
             body {
@@ -31,20 +27,9 @@ def show_image():
             .fullscreen-image {
                 width: 100vw;
                 height: 100vh;
-                object-fit: cover;  /* 圖片填滿整個畫面，可能裁切 */
+                object-fit: cover;
                 display: block;
             }
-            /* 如果不想裁切圖片，改用 contain（完整顯示但可能有黑邊） */
-            /*
-            .fullscreen-image {
-                width: 100vw;
-                height: 100vh;
-                object-fit: contain;
-                background: #000000;
-            }
-            */
-            
-            /* 封鎖標示 - 浮在圖片上方 */
             .overlay {
                 position: fixed;
                 bottom: 30px;
@@ -54,7 +39,6 @@ def show_image():
                 color: #ffffff;
                 font-family: system-ui, -apple-system, sans-serif;
                 font-size: 14px;
-                letter-spacing: 0.5px;
                 text-shadow: 0 2px 20px rgba(0,0,0,0.9);
                 background: rgba(0,0,0,0.4);
                 padding: 12px 20px;
@@ -65,14 +49,12 @@ def show_image():
                 width: fit-content;
                 max-width: 90%;
                 border-radius: 8px;
-                pointer-events: none;  /* 讓點擊穿透 */
+                pointer-events: none;
             }
             .overlay span {
                 color: #ff4444;
                 font-weight: bold;
             }
-            
-            /* 手機優化 */
             @media (max-width: 600px) {
                 .overlay {
                     font-size: 12px;
@@ -90,6 +72,11 @@ def show_image():
     </body>
     </html>
     '''
+
+# 新增一個備用路由，直接提供圖片
+@app.route('/image')
+def serve_image():
+    return send_file('static/image.png', mimetype='image/png')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
