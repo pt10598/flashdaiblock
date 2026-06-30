@@ -12,64 +12,79 @@ def show_image():
         <meta charset="UTF-8">
         <title>已封鎖</title>
         <style>
-            /* 完全重置 */
             * { 
                 margin: 0; 
                 padding: 0; 
                 box-sizing: border-box; 
             }
-            html, body {
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                background: #000000;
-            }
-            
-            /* 方法1: 使用背景圖片（最簡單） */
             body {
-                background-image: url('/static/image.png');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
+                background: #ffffff;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            }
+            .image-container {
+                max-width: 95vw;
+                max-height: 95vh;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+                border-radius: 18px;
+                overflow: hidden;
+                background: #ffffff;
+                line-height: 0;
+                transition: box-shadow 0.2s ease;
+                /* 圖片放大30% */
+                transform: scale(1.3);
+            }
+            .image-container:hover {
+                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            }
+            .image-container img {
+                display: block;
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 90vh;
+                object-fit: contain;
+                border-radius: 18px;
             }
             
-            /* 封鎖標示 */
-            .overlay {
+            /* 底部白色區域的標示 */
+            .footer {
                 position: fixed;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                color: #ffffff;
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 14px;
-                text-shadow: 0 2px 20px rgba(0,0,0,0.9);
-                background: rgba(0,0,0,0.5);
-                padding: 12px 24px;
-                backdrop-filter: blur(4px);
-                border-radius: 8px;
-                white-space: nowrap;
-                z-index: 10;
-                pointer-events: none;
-                border: 1px solid rgba(255,255,255,0.1);
+                bottom: 20px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                color: #888888;
+                font-size: 13px;
+                letter-spacing: 0.3px;
+                background: #ffffff;
+                padding: 12px 0;
+                border-top: 1px solid #eeeeee;
             }
-            .overlay span {
+            .footer span {
                 color: #ff4444;
                 font-weight: bold;
             }
             
             @media (max-width: 600px) {
-                .overlay {
+                .image-container {
+                    transform: scale(1.1);
+                }
+                .footer {
                     font-size: 11px;
-                    padding: 8px 16px;
-                    bottom: 20px;
-                    white-space: normal;
+                    padding: 8px 0;
                 }
             }
         </style>
     </head>
     <body>
-        <div class="overlay">
+        <div class="image-container">
+            <img src="/static/image.png" alt="已封鎖">
+        </div>
+        <div class="footer">
             ⛔ <span>已封鎖</span> · 此內容已被限制存取
         </div>
     </body>
