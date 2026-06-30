@@ -34,8 +34,8 @@ def show_image():
                 background: #ffffff;
                 line-height: 0;
                 transition: box-shadow 0.2s ease;
-                /* 圖片放大30% */
-                transform: scale(1.3);
+                /* 圖片放大20% */
+                transform: scale(1.2);
             }
             .image-container:hover {
                 box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
